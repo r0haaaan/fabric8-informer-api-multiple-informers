@@ -32,6 +32,8 @@ public class InformersTesting {
             informerFactory.addSharedInformerEventListener(e -> {
                 stopLatch.countDown();
                 logger.error("Exception encountered: ", e);
+                informerFactory.stopAllRegisteredInformers(true);
+                System.exit(-1);
             });
             informerFactory.startAllRegisteredInformers();
             stopLatch.await();
